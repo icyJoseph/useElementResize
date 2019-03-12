@@ -34,12 +34,12 @@ function App() {
             <code>useAutoSizer</code>
           </h1>
         </header>
-        <section>
-          <div>
-            <button onClick={timed}>Toggle</button>
-          </div>
-          <div>{open && <AutoSized open={open} />}</div>
-        </section>
+      </section>
+      <section>
+        <div>
+          <button onClick={timed}>Toggle</button>
+        </div>
+        <div>{open && <AutoSized open={open} />}</div>
       </section>
     </div>
   );
