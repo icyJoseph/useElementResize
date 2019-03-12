@@ -29,7 +29,7 @@ function useAutoSizer({
         console.log("onResize");
         setState({ running: true });
         if (window.requestAnimationFrame) {
-          window.requestAnimationFrame(runCallbacks);
+          timer = window.requestAnimationFrame(runCallbacks);
         } else {
           timer = setTimeout(runCallbacks, 66);
         }
@@ -52,6 +52,11 @@ function useAutoSizer({
     _detectElementResize.addResizeListener(node, _onResize);
 
     return () => {
+      if (window.cancelAnimationFrame) {
+        window.cancelAnimationFrame(timer);
+      } else {
+        clearTimeout(timer);
+      }
       _detectElementResize.removeResizeListener(node, _onResize);
       onExit({ width, height });
     };
