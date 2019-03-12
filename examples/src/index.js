@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import useAutoSizer from "../../src";
 import "./index.css";
 
-function AutoSized() {
-  const [width, height] = useAutoSizer();
+function AutoSized({ open }) {
+  const node = document.getElementById("root");
+  const [width, height] = useAutoSizer({
+    node,
+    onExit: () => console.log("exit")
+  });
   return (
     <div>
       <span className="text-muted">
@@ -19,6 +23,9 @@ function AutoSized() {
 }
 
 function App() {
+  const [open, toggle] = useState(false);
+
+  const timed = () => setTimeout(() => toggle(!open), 5000);
   return (
     <div className="App">
       <section>
@@ -27,9 +34,12 @@ function App() {
             <code>useAutoSizer</code>
           </h1>
         </header>
-        <div>
-          <AutoSized />
-        </div>
+        <section>
+          <div>
+            <button onClick={timed}>Toggle</button>
+          </div>
+          <div>{open && <AutoSized open={open} />}</div>
+        </section>
       </section>
     </div>
   );

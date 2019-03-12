@@ -4,7 +4,12 @@ import createDetectElementResize from "./vendor/detectElementResize";
 const initialState = { width: 0, height: 0, running: false };
 const reducer = (state, newState) => ({ ...state, ...newState });
 
-function useAutoSizer(node, nonce = "", onResize = () => {}) {
+function useAutoSizer({
+  node,
+  nonce = "",
+  onResize = () => {},
+  onExit = () => {}
+}) {
   const [{ width, height, running }, setState] = useReducer(
     reducer,
     initialState
@@ -21,6 +26,7 @@ function useAutoSizer(node, nonce = "", onResize = () => {}) {
 
     function _onResize() {
       if (!running) {
+        console.log("onResize");
         setState({ running: true });
         if (window.requestAnimationFrame) {
           window.requestAnimationFrame(runCallbacks);
@@ -32,6 +38,7 @@ function useAutoSizer(node, nonce = "", onResize = () => {}) {
 
     function runCallbacks() {
       if (node) {
+        console.log("running callbacks");
         const { offsetWidth = 0, offsetHeight = 0 } = node;
         if (width !== offsetWidth && height !== offsetHeight) {
           callbacks.forEach(callback =>
@@ -45,8 +52,8 @@ function useAutoSizer(node, nonce = "", onResize = () => {}) {
     _detectElementResize.addResizeListener(node, _onResize);
 
     return () => {
-      clearTimeout(timer);
       _detectElementResize.removeResizeListener(node, _onResize);
+      onExit({ width, height });
     };
   }, []);
 
