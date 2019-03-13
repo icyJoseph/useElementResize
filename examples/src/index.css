@@ -22,18 +22,37 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
 }
 
 section {
   display: flex;
+  text-align: center;
 }
 
 section > * {
   margin: 0.5em;
 }
 
-section:last-child {
+section.element-resize {
   flex-direction: column;
+}
+
+.resize-results > div {
+  margin: 0.5em;
+}
+
+.btn-demo {
+  border-radius: 10px !important;
+  min-width: 50px;
+}
+
+.one {
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.text-pink {
+  color: #e83e8c;
 }
