@@ -1,5 +1,5 @@
 {
-  "name": "use-auto-sizer",
+  "name": "use-element-resize",
   "version": "1.0.0",
   "description": "Detect element resize with hooks",
   "author": {
@@ -13,6 +13,8 @@
     "useEffectLayout",
     "useEffect",
     "auto-sizer",
+    "element-resize",
+    "resize",
     "reactjs"
   ],
   "main": "dist/index.js",
