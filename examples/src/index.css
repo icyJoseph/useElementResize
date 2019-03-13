@@ -25,3 +25,15 @@ code {
   justify-content: center;
   min-height: 100vh;
 }
+
+section {
+  display: flex;
+}
+
+section > * {
+  margin: 0.5em;
+}
+
+section:last-child {
+  flex-direction: column;
+}
