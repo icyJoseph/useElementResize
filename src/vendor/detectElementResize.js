@@ -164,7 +164,6 @@ export default function createDetectElementResize(nonce) {
   };
 
   var addResizeListener = function(element, fn) {
-    console.log("running resize listener");
     if (attachEvent) {
       element.attachEvent("onresize", fn);
     } else {
@@ -206,7 +205,6 @@ export default function createDetectElementResize(nonce) {
   };
 
   var removeResizeListener = function(element, fn) {
-    console.log("Detach");
     if (attachEvent) {
       element.detachEvent("onresize", fn);
     } else {
@@ -227,7 +225,6 @@ export default function createDetectElementResize(nonce) {
           element.__resizeTriggers__ = !element.removeChild(
             element.__resizeTriggers__
           );
-          console.log(element.__resizeTriggers__);
         } catch (e) {
           // Preact compat; see developit/preact-compat/issues/228
         }
