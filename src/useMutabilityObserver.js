@@ -7,7 +7,8 @@ const config = { attributes: true, childList: true, subtree: true };
 export function useMutabilityObserver({
   id,
   onMutation = () => {},
-  onResize = () => {}
+  onResize = () => {},
+  onExit = () => {}
 }) {
   // Select the node that will be observed for mutations
   const targetNode = document.getElementById(id) || document.body;
@@ -43,6 +44,8 @@ export function useMutabilityObserver({
 
     // Stop observing on unMount
     return () => {
+      const leftOvers = observer.takeRecords();
+      onExit({ leftOvers });
       window.cancelAnimationFrame(raf);
       observer.disconnect();
     };
