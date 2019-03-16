@@ -7,6 +7,7 @@
     "email": "contact@icjoseph.com",
     "url": "http://icjoseph.com"
   },
+  "repository": "github:icyJoseph/useAutoSizer",
   "keywords": [
     "react",
     "react-hooks",
@@ -15,7 +16,9 @@
     "auto-sizer",
     "element-resize",
     "resize",
-    "reactjs"
+    "reactjs",
+    "react-virtualized",
+    "mutation-observer"
   ],
   "main": "dist/index.js",
   "scripts": {
