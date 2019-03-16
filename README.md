@@ -1,4 +1,4 @@
-# useAutoSizer
+# useElementResize
 
 This package provides two abstractions to detect element resize events. It depends on React-Hooks!
 
@@ -14,6 +14,8 @@ Both of the abstractions return `width` and `height` when invoked, and consume t
 
 These abstractions can be used to replace the `AutoSizer` provided by [react-virtualized](https://github.com/bvaughn/react-virtualized), which implements [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), through a `React Class Component`. Instead you can use these hooks and pass `width` and `height` down to, for example, the [MultiGrid](https://github.com/bvaughn/react-virtualized/blob/master/docs/MultiGrid.md) component.
 
+> To use, just pass the `id` of the element you wish to observe!
+
 ## Demo
 
 In the example provided, one can toggle the resize listeners off, this is delayed 2 seconds. During this time, you can spam resize events, and see that the component is unmounted cleanly without any callbacks, or attempts to set React state left.
@@ -23,8 +25,11 @@ As with any hook, you simply invoke it at the top of your function component and
 This demo allows you to add divs with `1` as text content. These add as a `flex-column` and will stretch the `root` div, far beyond the height of the window. You can play around with `+1` and `-1` to see how the hooks respond to height changes.
 
 ```jsx
-import React from 'react;
-import {useMutabilityObserver, useDetectElementResize} from "use-element-resize";
+import React from "react";
+import {
+  useMutabilityObserver,
+  useDetectElementResize
+} from "use-element-resize";
 
 function ElementResize() {
   const target = { id: "root" };
