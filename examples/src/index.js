@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-import useDetectElementResize from "../../src/useDetectElementResize";
-import useMutabilityObserver from "../../src/useMutabilityObserver";
+import { useDetectElementResize, useMutabilityObserver } from "../../src";
 import "./index.css";
 
 function ElementResize() {
   const target = { id: "root" };
   const [width, height] = useDetectElementResize(target);
   const [obsWidth, obsHeight] = useMutabilityObserver(target);
+
   return (
     <div className="resize-results">
       <span>Root div dimensions:</span>
