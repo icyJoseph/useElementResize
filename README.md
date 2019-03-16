@@ -18,6 +18,8 @@ In the example provided, one can toggle the resize listeners off, this is delaye
 
 As with any hook, you simply invoke it at the top of your function component and now you have access to variable `widht`, `height`, `obsWidth`, `obsHeight`.
 
+This demo allows you to add divs with `1` as text content. These add as a `flex-column` and will stretch the `root` div, far beyond the height of the window. You can play around with `+1` and `-1` to see how the hooks respond to height changes.
+
 ```jsx
 import React from 'react;
 import {useMutabilityObserver, useDetectElementResize} from "use-auto-sizer";
