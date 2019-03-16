@@ -12,6 +12,8 @@ Both of the abstractions return `width` and `height` when invoked, and consume t
 
 > These abstractions detect element resize! Not the same as attaching a listener to the resize event.
 
+These abstractions can be used to replace the `AutoSizer` provided by [react-virtualized](https://github.com/bvaughn/react-virtualized), which implements [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), through a `React Class Component`. Instead you can use these hooks and pass `width` and `height` down to, for example, the [MultiGrid](https://github.com/bvaughn/react-virtualized/blob/master/docs/MultiGrid.md) component.
+
 ## Demo
 
 In the example provided, one can toggle the resize listeners off, this is delayed 2 seconds. During this time, you can spam resize events, and see that the component is unmounted cleanly without any callbacks, or attempts to set React state left.
