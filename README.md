@@ -24,7 +24,7 @@ This demo allows you to add divs with `1` as text content. These add as a `flex-
 
 ```jsx
 import React from 'react;
-import {useMutabilityObserver, useDetectElementResize} from "use-auto-sizer";
+import {useMutabilityObserver, useDetectElementResize} from "use-element-resize";
 
 function ElementResize() {
   const target = { id: "root" };

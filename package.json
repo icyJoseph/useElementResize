@@ -7,7 +7,7 @@
     "email": "contact@icjoseph.com",
     "url": "http://icjoseph.com"
   },
-  "repository": "github:icyJoseph/useAutoSizer",
+  "repository": "github:icyJoseph/useElementResize",
   "keywords": [
     "react",
     "react-hooks",
