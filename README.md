@@ -2,27 +2,31 @@
 
 This package provides two abstractions to detect element resize events. It depends on React-Hooks!
 
-The first abstraction uses [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), and it is invoked as `useDetectElementResize`.
+The first abstraction uses [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), and it can be invoked as `useDetectElementResize`.
 
 The second abstraction is a very simple implementation of mutability observers. We create an observer and connect it to the desired element.
 
 Both of these, can take an `onResize` callback, which is of course, called every time a resize event happens. They also take `onExit`, which is called when the component unmounts.
 
-Both of them return `width` and `height` when invoked.
+Both of the abstractions return `width` and `height` when invoked, and consume their callbacks with `width` and `height`. When using `onExit` on `useMutabilityObserver`, the left over records are passed to the callback.
 
-> These abstractions detect element resize! Not the same as attaching a listener to the onresize event.
+> These abstractions detect element resize! Not the same as attaching a listener to the resize event.
 
 ## Demo
 
 In the example provided, one can toggle the resize listeners off, this is delayed 2 seconds. During this time, you can spam resize events, and see that the component is unmounted cleanly without any callbacks, or attempts to set React state left.
 
-As with any hook, you simply invoke it at the top of your function component and now you have access to variable`widht`, `height`, `obsWidth`, `obsHeight`.
+As with any hook, you simply invoke it at the top of your function component and now you have access to variable `widht`, `height`, `obsWidth`, `obsHeight`.
 
 ```jsx
+import React from 'react;
+import {useMutabilityObserver, useDetectElementResize} from "useAutoSizer";
+
 function ElementResize() {
   const target = { id: "root" };
   const [width, height] = useDetectElementResize(target);
   const [obsWidth, obsHeight] = useMutabilityObserver(target);
+
   return (
     <div className="resize-results">
       <span>Root div dimensions:</span>
