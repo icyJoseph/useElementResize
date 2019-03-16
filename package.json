@@ -19,6 +19,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
+    "deploy": "yarn build && surge --domain https://super-clouds.surge.sh --project ./examples/dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development",
