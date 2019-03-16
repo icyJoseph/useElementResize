@@ -20,7 +20,7 @@ As with any hook, you simply invoke it at the top of your function component and
 
 ```jsx
 import React from 'react;
-import {useMutabilityObserver, useDetectElementResize} from "useAutoSizer";
+import {useMutabilityObserver, useDetectElementResize} from "use-auto-sizer";
 
 function ElementResize() {
   const target = { id: "root" };
