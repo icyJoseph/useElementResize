@@ -6,9 +6,9 @@ import useMutabilityObserver from "../../src/useMutabilityObserver";
 import "./index.css";
 
 function ElementResize() {
-  const node = document.getElementById("root");
-  const [width, height] = useDetectElementResize({ node });
-  const [obsWidth, obsHeight] = useMutabilityObserver({ id: "root" });
+  const target = { id: "root" };
+  const [width, height] = useDetectElementResize(target);
+  const [obsWidth, obsHeight] = useMutabilityObserver(target);
   return (
     <div className="resize-results">
       <span>Root div dimensions:</span>
@@ -41,7 +41,7 @@ function ElementResize() {
 }
 
 function App() {
-  const [open, toggle] = useState(false);
+  const [open, toggle] = useState(true);
   const [list, expandList] = useState([]);
 
   const timed = () => setTimeout(() => toggle(!open), 2000);

@@ -1,10 +1,59 @@
-# useAutoSize
+# useAutoSizer
+
+This package provides two abstractions to detect element resize events. It depends on React-Hooks!
+
+The first abstraction uses [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), and it is invoked as `useDetectElementResize`.
+
+The second abstraction is a very simple implementation of mutability observers. We create an observer and connect it to the desired element.
+
+Both of these, can take an `onResize` callback, which is of course, called every time a resize event happens. They also take `onExit`, which is called when the component unmounts.
+
+Both of them return `width` and `height` when invoked.
+
+> These abstractions detect element resize! Not the same as attaching a listener to the onresize event.
 
 ## Demo
 
-## Implementation
+In the example provided, one can toggle the resize listeners off, this is delayed 2 seconds. During this time, you can spam resize events, and see that the component is unmounted cleanly without any callbacks, or attempts to set React state left.
 
-## Example
+As with any hook, you simply invoke it at the top of your function component and now you have access to variable`widht`, `height`, `obsWidth`, `obsHeight`.
+
+```jsx
+function ElementResize() {
+  const target = { id: "root" };
+  const [width, height] = useDetectElementResize(target);
+  const [obsWidth, obsHeight] = useMutabilityObserver(target);
+  return (
+    <div className="resize-results">
+      <span>Root div dimensions:</span>
+      <div>
+        <code>useDetectElementResize</code>
+        <div>
+          <span className="text-muted">
+            Width: <span className="text-success">{width}</span> px
+          </span>
+          {" - "}
+          <span className="text-muted">
+            Height: <span className="text-danger">{height}</span> px
+          </span>
+        </div>
+      </div>
+      <div>
+        <code>useMutabilityObserver</code>
+        <div>
+          <span className="text-muted">
+            obsWidth: <span className="text-success">{obsWidth}</span> px
+          </span>
+          {" - "}
+          <span className="text-muted">
+            obsHeight: <span className="text-danger">{obsHeight}</span> px
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
 
 ## License
 
@@ -17,7 +66,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-```
-
-```
