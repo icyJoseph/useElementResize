@@ -53,6 +53,13 @@ function App() {
       <section>
         <header>
           <h1 className="display-4 text-pink">Element Resize Hooks</h1>
+          <a
+            href="https://github.com/icyJoseph/useElementResize"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github Repo
+          </a>
         </header>
       </section>
       <section>
