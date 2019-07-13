@@ -1,6 +1,6 @@
 {
   "name": "use-element-resize",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Detect element resize with hooks",
   "author": {
     "name": "Joseph Chamochumbi",
