@@ -1,5 +1,8 @@
 # useElementResize
 
+[![npm](https://img.shields.io/npm/dm/use-element-resize.svg)]()
+
+
 This package provides two abstractions to detect element resize events. It depends on React-Hooks!
 
 The first abstraction uses [javascript-detect-element-resize](https://github.com/sdecima/javascript-detect-element-resize), and it can be invoked as `useDetectElementResize`.
