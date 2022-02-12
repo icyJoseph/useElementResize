@@ -21,11 +21,10 @@
     "mutation-observer"
   ],
   "source": "examples/src/index.html",
-  "main": "dist/index.js",
   "scripts": {
     "build:lib": "tsc",
     "build:demo": "parcel build",
-    "deploy": "yarn build && surge --domain https://super-clouds.surge.sh --project ./examples/dist",
+    "deploy": "yarn build:demo && surge --domain https://super-clouds.surge.sh --project ./examples/dist",
     "start:demo": "parcel",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "yarn build:lib"
