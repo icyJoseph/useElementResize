@@ -23,7 +23,7 @@
   "source": "examples/src/index.html",
   "scripts": {
     "build:lib": "tsc",
-    "build:demo": "parcel build",
+    "build:demo": "parcel build --dist-dir examples/dist",
     "deploy": "yarn build:demo && surge --domain https://super-clouds.surge.sh --project ./examples/dist",
     "start:demo": "parcel",
     "test": "echo \"Error: no test specified\" && exit 1",
