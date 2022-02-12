@@ -1,21 +1,37 @@
 import { useReducer, useEffect, useRef } from "react";
 import { reducer } from "./reducer";
-import { useResizeObserver } from ".";
 
-// Options for the observer (which mutations to observe)
-const config = { attributes: true, childList: true, subtree: true };
 const noop = () => {};
 
-export function useMutabilityObserver({ id, onResize = noop, onExit = noop }) {
+type State = {
+  width: number;
+  height: number;
+  running: boolean;
+};
+
+type ResizeObserverProps = {
+  id: string;
+  onResize: (args: Pick<State, "width" | "height">) => void;
+  onExit: (args: Pick<State, "width" | "height">) => void;
+};
+
+export function useResizeObserver({
+  id,
+  onResize = noop,
+  onExit = noop
+}: ResizeObserverProps) {
   // Select the node that will be observed for mutations
   const targetNode = document.getElementById(id) || document.body;
   // Set up hooks
   // setup state
-  const [state, setState] = useReducer(reducer, {
-    width: targetNode.offsetWidth,
-    height: targetNode.offsetHeight,
-    running: false
-  });
+  const [state, setState] = useReducer(
+    (prev: State, next: Partial<State>) => reducer(prev, next),
+    {
+      width: targetNode.offsetWidth,
+      height: targetNode.offsetHeight,
+      running: false
+    } as State
+  );
 
   const { width, height, running } = state;
 
@@ -25,20 +41,14 @@ export function useMutabilityObserver({ id, onResize = noop, onExit = noop }) {
   const _onExit = useRef(onExit);
   _onExit.current = onExit;
 
-  const [_width, _height] = useResizeObserver({ id });
-
-  useEffect(() => {
-    setState({ width: _width, height: _height });
-  }, [_width, _height]);
-
   useEffect(() => {
     // setup callbacks
-    const callOnResize = ({ width, height }) =>
+    const callOnResize = ({ width, height, running: _ }: State) =>
       _onResize.current({ width, height });
 
     const callbacks = [setState, callOnResize];
     // Callback function to execute when mutations are observed
-    let raf;
+    let raf: ReturnType<typeof window.requestAnimationFrame>;
 
     function _onMutation() {
       // if already running, avoid the payload
@@ -65,9 +75,9 @@ export function useMutabilityObserver({ id, onResize = noop, onExit = noop }) {
     }
 
     // Create an observer instance linked to the callback function
-    const observer = new MutationObserver(_onMutation);
+    const observer = new ResizeObserver(_onMutation);
     // Start observing the target node for configured mutations
-    observer.observe(targetNode, config);
+    observer.observe(targetNode, { box: "border-box" });
     // force an initial run!
     _onMutation();
 
@@ -80,15 +90,14 @@ export function useMutabilityObserver({ id, onResize = noop, onExit = noop }) {
         clearTimeout(raf);
       }
       // catch left over records
-      const leftOvers = observer.takeRecords();
       // disconnect
       observer.disconnect();
       // call onExit callback
-      _onExit.current({ leftOvers, width, height });
+      _onExit.current({ width, height });
     };
   }, [setState]);
 
   return [width, height];
 }
 
-export default useMutabilityObserver;
+export default useResizeObserver;
